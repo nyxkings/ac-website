@@ -2,7 +2,7 @@
 
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { PROJECT_CATEGORIES, type Project, type ProjectCategory } from "@/types";
-import { cn } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import { useMemo, useState } from "react";
 
 type FilterId = "all" | ProjectCategory;
@@ -26,7 +26,7 @@ export function ProjectBrowser({ projects }: { projects: Project[] }) {
   return (
     <div>
       <div
-        className="flex flex-wrap gap-2"
+        className="chip-scroll sm:flex-wrap sm:overflow-visible"
         role="tablist"
         aria-label="Filter projects by category"
       >
@@ -93,7 +93,7 @@ function FilterChip({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "inline-flex h-10 items-center gap-2 rounded-[var(--radius-control)] border px-3.5 text-sm transition-colors",
+        "inline-flex h-11 items-center gap-2 rounded-[var(--radius-control)] border px-3.5 text-sm transition-colors touch-manipulation",
         active
           ? "border-accent bg-accent text-accent-fg"
           : "border-line bg-surface text-muted hover:border-accent hover:text-accent",

@@ -38,7 +38,7 @@ export function ContactSection({
   return (
     <section
       id="contact"
-      className="scroll-mt-24 border-b border-line py-16 sm:py-24"
+      className="scroll-mt-24 border-b border-line py-12 sm:py-24"
     >
       <Container>
         <SectionHeading
@@ -49,7 +49,7 @@ export function ContactSection({
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
           <aside className="space-y-6">
-            <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6">
+            <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4 sm:p-6">
               <p className="font-mono text-xs tracking-[0.14em] text-accent uppercase">
                 Reach me
               </p>
@@ -72,17 +72,21 @@ export function ContactSection({
                         {...(link.href.startsWith("http")
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
-                        className="flex items-center gap-3 rounded-[var(--radius-control)] border border-line px-3 py-3 text-sm text-ink transition-colors hover:border-accent hover:text-accent"
+                        className="flex min-h-11 items-start gap-3 rounded-[var(--radius-control)] border border-line px-3 py-3 text-sm text-ink transition-colors touch-manipulation hover:border-accent hover:text-accent"
                       >
-                        <span className="text-accent">{linkIcon(link.id)}</span>
-                        <span>
+                        <span className="mt-0.5 shrink-0 text-accent">
+                          {linkIcon(link.id)}
+                        </span>
+                        <span className="min-w-0">
                           <span className="block font-medium">{link.label}</span>
                           <span className="text-xs text-muted break-all">
                             {link.id === "email"
                               ? site.email
                               : link.id === "phone"
                                 ? site.phone
-                                : link.href.replace(/^https?:\/\//, "")}
+                                : link.id === "linkedin"
+                                  ? "linkedin.com/in/ada-chinda"
+                                  : link.href.replace(/^https?:\/\//, "")}
                           </span>
                         </span>
                       </a>
@@ -100,11 +104,11 @@ export function ContactSection({
             ) : null}
           </aside>
 
-          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-8">
+          <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4 sm:p-8">
             <p className="font-mono text-xs tracking-[0.14em] text-accent uppercase">
               Send a message
             </p>
-            <p className="mt-2 text-sm text-muted">
+            <p className="mt-2 text-sm text-muted text-pretty">
               Prefer a form? Leave your details below — validation runs before
               anything is sent.
             </p>

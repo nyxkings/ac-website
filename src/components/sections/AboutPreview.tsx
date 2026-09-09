@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export function AboutPreview() {
   return (
-    <section id="about" className="scroll-mt-24 border-b border-line py-16 sm:py-24">
+    <section id="about" className="scroll-mt-24 border-b border-line py-12 sm:py-24">
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading

@@ -16,7 +16,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `Resume for ${site.name} — ${site.roleLine}. Download PDF or browse the online summary.`,
+  description: `Resume for ${site.name} — ${site.roleLine}. Online summary and PDF download.`,
+  alternates: { canonical: "/resume" },
+  openGraph: {
+    title: `Resume · ${site.name}`,
+    description: `Resume for ${site.name} — ${site.roleLine}.`,
+    url: "/resume",
+  },
 };
 
 export default function ResumePage() {
@@ -26,47 +32,48 @@ export default function ResumePage() {
     <>
       <Navbar />
       <main id="main" className="flex-1">
-        <section className="border-b border-line py-14 sm:py-20">
+        <section className="border-b border-line py-10 sm:py-20">
           <Container>
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-2xl">
+            <div className="flex flex-col gap-6 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl min-w-0">
                 <p className="font-mono text-xs tracking-[0.14em] text-accent uppercase">
                   Resume
                 </p>
-                <h1 className="font-display mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+                <h1 className="font-display mt-3 text-[1.85rem] font-bold tracking-tight text-ink sm:text-5xl text-balance">
                   {site.name}
                 </h1>
                 <p className="mt-3 font-mono text-sm text-muted sm:text-base">
                   {site.roleLine}
                 </p>
-                <p className="mt-5 text-base leading-relaxed text-muted sm:text-lg">
+                <p className="mt-5 text-[0.95rem] leading-relaxed text-muted text-pretty sm:text-lg">
                   {resumeSummary}
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
                 <ButtonLink
                   href={site.resumePdfPath}
                   download="Ada-Chinda-Resume.pdf"
+                  className="w-full sm:w-auto"
                 >
                   <Download className="h-4 w-4" aria-hidden />
                   Download resume
                 </ButtonLink>
-                <ButtonLink href="/contact" variant="secondary">
+                <ButtonLink href="/contact" variant="secondary" className="w-full sm:w-auto">
                   Contact
                 </ButtonLink>
               </div>
             </div>
 
-            <p className="mt-6 max-w-2xl text-xs text-muted">
-              PDF path:{" "}
-              <code className="text-ink">{site.resumePdfPath}</code>
-              {" — "}
-              replace the file in{" "}
-              <code className="text-ink">public/resume/</code> to update the
-              download (keep the same filename, or change{" "}
-              <code className="text-ink">resumePdfPath</code> in{" "}
-              <code className="text-ink">src/content/site.ts</code>).
+            <p
+              className="mt-6 max-w-2xl rounded-[var(--radius-control)] border border-signal/40 bg-signal/10 px-4 py-3 text-sm text-ink text-pretty"
+              role="status"
+            >
+              The downloadable PDF is still a{" "}
+              <strong className="font-medium">placeholder file</strong>. Replace{" "}
+              <code className="text-sm">public/resume/Ada-Chinda-Resume.pdf</code>{" "}
+              with your Canva/export PDF (same filename) before sharing with
+              recruiters.
             </p>
           </Container>
         </section>
@@ -183,24 +190,25 @@ export default function ResumePage() {
 
         <section className="py-14 sm:py-16">
           <Container>
-            <div className="flex flex-col items-start justify-between gap-6 rounded-[var(--radius-card)] border border-line bg-surface px-6 py-8 sm:flex-row sm:items-center sm:px-8">
-              <div>
+            <div className="flex flex-col items-stretch justify-between gap-6 rounded-[var(--radius-card)] border border-line bg-surface px-5 py-7 sm:flex-row sm:items-center sm:px-8 sm:py-8">
+              <div className="min-w-0">
                 <p className="font-mono text-xs tracking-[0.14em] text-accent uppercase">
                   PDF
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-semibold text-ink">
+                <h2 className="font-display mt-2 text-xl font-semibold text-ink sm:text-2xl text-balance">
                   Prefer a printable copy?
                 </h2>
-                <p className="mt-2 max-w-xl text-sm text-muted">
+                <p className="mt-2 max-w-xl text-sm text-muted text-pretty">
                   Download the resume PDF. When you export a fresh file from
                   Canva, drop it in{" "}
-                  <code className="text-ink">public/resume/</code> using the
+                  <code className="break-all text-ink">public/resume/</code> using the
                   same filename.
                 </p>
               </div>
               <ButtonLink
                 href={site.resumePdfPath}
                 download="Ada-Chinda-Resume.pdf"
+                className="w-full shrink-0 sm:w-auto"
               >
                 <Download className="h-4 w-4" aria-hidden />
                 Download resume

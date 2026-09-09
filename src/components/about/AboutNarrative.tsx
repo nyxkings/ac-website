@@ -10,14 +10,14 @@ export function AboutNarrative({
 
   return (
     <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
-      <div className="space-y-5 text-base leading-relaxed text-muted sm:text-lg">
+      <div className="space-y-5 text-[0.95rem] leading-relaxed text-muted text-pretty sm:text-lg">
         <p className="text-ink">{about.lead}</p>
         {paragraphs.map((p) => (
           <p key={p}>{p}</p>
         ))}
       </div>
 
-      <aside className="h-fit rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-7">
+      <aside className="h-fit rounded-[var(--radius-card)] border border-line bg-surface p-4 sm:p-7">
         <p className="font-mono text-xs tracking-[0.12em] text-accent uppercase">
           Focus
         </p>

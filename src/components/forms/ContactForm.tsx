@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import { site } from "@/content/site";
 import { useState, type FormEvent, type ReactNode } from "react";
 
@@ -39,11 +39,15 @@ export function ContactForm({
     const next: FieldErrors = {};
     if (name.trim().length < 2)
       next.name = "Please enter your name (at least 2 characters).";
+    else if (name.trim().length > 120) next.name = "Name is too long.";
     if (!email.trim()) next.email = "Please enter your email address.";
     else if (!isValidEmail(email.trim()))
       next.email = "Please enter a valid email address.";
+    else if (email.trim().length > 254) next.email = "Email is too long.";
     if (message.trim().length < 10)
       next.message = "Please enter a message (at least 10 characters).";
+    else if (message.trim().length > 5000)
+      next.message = "Message is too long (max 5000 characters).";
     return next;
   }
 
@@ -152,6 +156,7 @@ export function ContactForm({
             type="text"
             autoComplete="name"
             required
+            maxLength={120}
             value={name}
             disabled={status === "loading"}
             onChange={(e) => setName(e.target.value)}
@@ -172,6 +177,7 @@ export function ContactForm({
             type="email"
             autoComplete="email"
             required
+            maxLength={254}
             value={email}
             disabled={status === "loading"}
             onChange={(e) => setEmail(e.target.value)}
@@ -188,6 +194,7 @@ export function ContactForm({
           name="message"
           required
           rows={6}
+          maxLength={5000}
           value={message}
           disabled={status === "loading"}
           onChange={(e) => setMessage(e.target.value)}
@@ -229,13 +236,17 @@ export function ContactForm({
         </div>
       ) : null}
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Button type="submit" disabled={status === "loading"}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <Button
+          type="submit"
+          disabled={status === "loading"}
+          className="w-full sm:w-auto"
+        >
           {status === "loading" ? "Sending…" : "Send message"}
         </Button>
-        <p className="text-xs text-muted">
+        <p className="text-center text-xs text-muted sm:text-left">
           Or email{" "}
-          <a className="text-accent hover:underline" href={`mailto:${site.email}`}>
+          <a className="break-all text-accent hover:underline" href={`mailto:${site.email}`}>
             {site.email}
           </a>
         </p>
@@ -272,7 +283,7 @@ function Field({
 
 function inputClass(hasError: boolean) {
   return cn(
-    "w-full rounded-[var(--radius-control)] border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors placeholder:text-muted/70",
+    "w-full rounded-[var(--radius-control)] border bg-bg px-3.5 py-3 text-base text-ink outline-none transition-colors placeholder:text-muted/70 sm:py-2.5 sm:text-sm",
     "focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/30",
     hasError ? "border-signal" : "border-line",
   );

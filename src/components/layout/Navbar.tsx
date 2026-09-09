@@ -18,8 +18,20 @@ export function Navbar() {
   const onContact = pathname.startsWith("/contact");
   const onResume = pathname.startsWith("/resume");
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string>("");
+  const [sectionActive, setSectionActive] = useState("");
   const [scrolled, setScrolled] = useState(false);
+
+  const routeActive = onProjects
+    ? "/projects"
+    : onAbout
+      ? "/about"
+      : onContact
+        ? "/contact"
+        : onResume
+          ? ""
+          : null;
+
+  const active = routeActive ?? sectionActive;
 
   useEffect(() => {
     function onScroll() {
@@ -31,22 +43,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (onProjects) {
-      setActive("/projects");
-      return;
-    }
-    if (onAbout) {
-      setActive("/about");
-      return;
-    }
-    if (onContact) {
-      setActive("/contact");
-      return;
-    }
-    if (onResume) {
-      setActive("");
-      return;
-    }
+    if (pathname !== "/") return;
 
     const elements = sectionIds
       .map((id) => document.getElementById(id))
@@ -62,18 +59,18 @@ export function Navbar() {
         if (visible[0]?.target.id) {
           const id = visible[0].target.id;
           if (id === "projects") {
-            setActive("/projects");
+            setSectionActive("/projects");
             return;
           }
           if (id === "about") {
-            setActive("/about");
+            setSectionActive("/about");
             return;
           }
           if (id === "contact") {
-            setActive("/contact");
+            setSectionActive("/contact");
             return;
           }
-          setActive(`/#${id}`);
+          setSectionActive(`/#${id}`);
         }
       },
       { rootMargin: "-20% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] },
@@ -81,7 +78,7 @@ export function Navbar() {
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [onProjects, onAbout, onContact, onResume, pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -90,19 +87,33 @@ export function Navbar() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    const first = document.querySelector<HTMLElement>(
+      "#mobile-nav a, #mobile-nav button",
+    );
+    first?.focus();
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header
       className={cn(
         "sticky top-0 z-50 border-b transition-colors duration-200",
-        scrolled
-          ? "border-line bg-bg/90 backdrop-blur-md"
+        scrolled || open
+          ? "border-line bg-bg/95 backdrop-blur-md"
           : "border-transparent bg-bg/70 backdrop-blur-sm",
       )}
     >
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-14 items-center justify-between gap-3 sm:h-16 sm:gap-4">
         <Link
           href="/"
-          className="font-display text-lg font-semibold tracking-tight text-ink"
+          className="font-display min-w-0 truncate text-base font-semibold tracking-tight text-ink sm:text-lg"
+          onClick={() => setOpen(false)}
         >
           {site.shortName}
         </Link>
@@ -130,11 +141,11 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-ink md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-ink touch-manipulation md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -146,8 +157,11 @@ export function Navbar() {
       </Container>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-line bg-bg md:hidden">
-          <Container className="flex flex-col gap-1 py-4">
+        <div
+          id="mobile-nav"
+          className="fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto border-t border-line bg-bg md:hidden"
+        >
+          <Container className="flex flex-col gap-1 py-4 pb-10">
             {navLinks.map((link) => {
               const isActive =
                 active === link.href ||
@@ -160,8 +174,8 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "rounded-[var(--radius-control)] px-3 py-3 text-base",
-                    isActive ? "text-accent" : "text-ink",
+                    "rounded-[var(--radius-control)] px-3 py-3.5 text-base touch-manipulation",
+                    isActive ? "bg-accent-soft/50 text-accent" : "text-ink",
                   )}
                   onClick={() => setOpen(false)}
                 >
@@ -169,6 +183,16 @@ export function Navbar() {
                 </Comp>
               );
             })}
+            <Link
+              href="/resume"
+              className={cn(
+                "mt-1 rounded-[var(--radius-control)] px-3 py-3.5 text-base touch-manipulation",
+                onResume ? "bg-accent-soft/50 text-accent" : "text-muted",
+              )}
+              onClick={() => setOpen(false)}
+            >
+              Resume
+            </Link>
           </Container>
         </div>
       ) : null}

@@ -18,10 +18,14 @@ function validate(payload: ContactPayload) {
   const message = payload.message?.trim() ?? "";
 
   if (name.length < 2) errors.name = "Please enter your name (at least 2 characters).";
+  if (name.length > 120) errors.name = "Name is too long.";
   if (!email) errors.email = "Please enter your email address.";
   else if (!isValidEmail(email)) errors.email = "Please enter a valid email address.";
+  else if (email.length > 254) errors.email = "Email is too long.";
   if (message.length < 10)
     errors.message = "Please enter a message (at least 10 characters).";
+  else if (message.length > 5000)
+    errors.message = "Message is too long (max 5000 characters).";
 
   return { name, email, message, website: payload.website?.trim() ?? "", errors };
 }
@@ -95,6 +99,21 @@ export async function POST(req: Request) {
         new URL("/contact?error=not_configured", req.url),
         303,
       );
+    }
+
+    // Formspree IDs are opaque tokens — reject anything that could alter the URL path
+    if (!/^[a-zA-Z0-9]+$/.test(formId)) {
+      if (wantsJson(req)) {
+        return NextResponse.json(
+          {
+            ok: false,
+            error: "Contact form configuration is invalid.",
+            code: "INVALID_CONFIG",
+          },
+          { status: 500 },
+        );
+      }
+      return NextResponse.redirect(new URL("/contact?error=send", req.url), 303);
     }
 
     const response = await fetch(`https://formspree.io/f/${formId}`, {

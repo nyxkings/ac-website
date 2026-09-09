@@ -39,7 +39,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         <Container className="relative py-10 sm:py-14">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+            className="inline-flex min-h-11 items-center gap-2 text-sm text-muted transition-colors touch-manipulation hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Back to projects
@@ -59,26 +59,27 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 ) : null}
               </div>
 
-              <h1 className="font-display mt-4 text-4xl font-bold tracking-tight text-ink sm:text-5xl text-balance">
+              <h1 className="font-display mt-4 text-[1.85rem] leading-tight font-bold tracking-tight text-ink sm:text-5xl text-balance">
                 {project.title}
               </h1>
 
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted text-pretty sm:mt-5 sm:text-lg">
                 {project.description}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
                 {project.githubUrl ? (
                   <ButtonLink
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="w-full sm:w-auto"
                   >
                     <GitHubIcon className="h-4 w-4" />
                     GitHub
                   </ButtonLink>
                 ) : (
-                  <span className="inline-flex h-11 items-center rounded-[var(--radius-control)] border border-dashed border-line px-5 text-sm text-muted">
+                  <span className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-control)] border border-dashed border-line px-5 text-center text-sm text-muted sm:justify-start">
                     GitHub — link pending
                   </span>
                 )}
@@ -88,12 +89,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                     variant="secondary"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="w-full sm:w-auto"
                   >
                     <ExternalLink className="h-4 w-4" aria-hidden />
                     Live application
                   </ButtonLink>
                 ) : (
-                  <span className="inline-flex h-11 items-center rounded-[var(--radius-control)] border border-dashed border-line px-5 text-sm text-muted">
+                  <span className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-control)] border border-dashed border-line px-5 text-center text-sm text-muted sm:justify-start">
                     Live demo — link pending
                   </span>
                 )}
@@ -104,13 +106,15 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={project.coverImage}
-                alt=""
+                alt={`${project.title} cover visual`}
+                width={960}
+                height={600}
                 className="aspect-[16/10] w-full object-cover"
               />
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-2">
+          <div className="chip-scroll mt-10 sm:flex-wrap sm:overflow-visible">
             {project.technologies.map((tech) => (
               <Tag key={tech}>{tech}</Tag>
             ))}
@@ -119,7 +123,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       </header>
 
       <Container className="max-w-3xl py-4 lg:max-w-[70rem]">
-        <div className="lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-14">
+        <div className="min-w-0 lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[220px_minmax(0,1fr)] xl:gap-14">
           <aside className="hidden lg:block">
             <nav
               className="sticky top-24 space-y-2 py-10"
@@ -209,7 +213,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 Data moves through the following stages end to end:
               </p>
               <ProjectPipeline steps={project.pipeline} />
-              <p className="mt-6 font-mono text-sm text-muted">
+              <p className="mt-6 font-mono text-xs leading-relaxed text-muted text-pretty break-words sm:text-sm">
                 {project.pipeline.join(" → ")}
               </p>
             </CaseStudySection>

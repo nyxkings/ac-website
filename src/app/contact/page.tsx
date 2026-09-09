@@ -6,7 +6,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact ${site.name} — email, LinkedIn, GitHub, or send a message.`,
+  description: `Contact ${site.name} — email, phone, LinkedIn, GitHub, or send a message about data science, analytics, or machine learning opportunities.`,
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: `Contact · ${site.name}`,
+    description: `Get in touch with ${site.name} for data science and analytics opportunities.`,
+    url: "/contact",
+  },
 };
 
 type PageProps = {

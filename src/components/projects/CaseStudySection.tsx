@@ -1,4 +1,4 @@
-import { cn } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 export function CaseStudySection({
@@ -17,17 +17,17 @@ export function CaseStudySection({
   return (
     <section
       id={id}
-      className={cn("scroll-mt-24 border-b border-line py-12 sm:py-14", className)}
+      className={cn("scroll-mt-24 border-b border-line py-10 sm:py-14", className)}
     >
       {eyebrow ? (
         <p className="font-mono text-xs tracking-[0.14em] text-accent uppercase">
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display mt-2 text-2xl font-semibold tracking-tight text-ink sm:text-3xl text-balance">
+      <h2 className="font-display mt-2 text-xl font-semibold tracking-tight text-ink sm:text-3xl text-balance">
         {title}
       </h2>
-      <div className="mt-6 space-y-4 text-base leading-relaxed text-muted">
+      <div className="mt-5 space-y-4 text-[0.95rem] leading-relaxed text-muted text-pretty sm:mt-6 sm:text-base">
         {children}
       </div>
     </section>

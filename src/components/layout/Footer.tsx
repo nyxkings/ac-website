@@ -31,8 +31,8 @@ function LinkedInIcon({ className }: { className?: string }) {
 export function Footer() {
   return (
     <footer className="border-t border-line bg-surface">
-      <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <Container className="flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-10">
+        <div className="min-w-0">
           <p className="font-display text-base font-semibold text-ink">
             {site.name}
           </p>
@@ -41,7 +41,7 @@ export function Footer() {
           </p>
           <a
             href={site.phoneHref}
-            className="mt-2 inline-block font-mono text-sm text-muted transition-colors hover:text-accent"
+            className="mt-2 inline-flex min-h-11 items-center font-mono text-sm text-muted transition-colors hover:text-accent"
           >
             {site.phone}
           </a>
@@ -50,17 +50,17 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent touch-manipulation"
             aria-label="Email"
           >
             <Mail className="h-4 w-4" aria-hidden />
           </a>
           <a
             href={site.phoneHref}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent touch-manipulation"
             aria-label={`Call ${site.phone}`}
           >
             <Phone className="h-4 w-4" aria-hidden />
@@ -69,7 +69,7 @@ export function Footer() {
             href={site.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent touch-manipulation"
             aria-label="GitHub"
           >
             <GitHubIcon className="h-4 w-4" />
@@ -78,7 +78,7 @@ export function Footer() {
             href={site.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent touch-manipulation"
             aria-label="LinkedIn"
           >
             <LinkedInIcon className="h-4 w-4" />

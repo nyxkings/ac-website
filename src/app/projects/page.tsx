@@ -4,12 +4,19 @@ import { Container } from "@/components/layout/Container";
 import { ProjectBrowser } from "@/components/projects/ProjectBrowser";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getAllProjects } from "@/lib/projects";
+import { site } from "@/content/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "Data science, analytics, machine learning, and academic projects — including Prophet forecasting for portfolio optimisation.",
+  description: `Projects by ${site.name}: data science, analytics, machine learning, and academic work — including Prophet forecasting for portfolio optimisation.`,
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    title: `Projects · ${site.name}`,
+    description:
+      "Data science, analytics, machine learning, and academic projects — including Prophet forecasting for portfolio optimisation.",
+    url: "/projects",
+  },
 };
 
 export default function ProjectsPage() {

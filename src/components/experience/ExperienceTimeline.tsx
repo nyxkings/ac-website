@@ -13,7 +13,7 @@ export function ExperienceTimeline({
       {items.map((item) => (
         <li
           key={item.id}
-          className="relative border-l border-line pl-6 pb-10 last:pb-0"
+          className="relative border-l border-line pl-5 pb-8 last:pb-0 sm:pl-6 sm:pb-10"
         >
           <span
             className="absolute top-1.5 -left-[5px] h-2.5 w-2.5 rounded-full border-2 border-accent bg-bg"

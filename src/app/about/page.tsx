@@ -15,7 +15,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${site.tagline} Background, skills, experience, and education.`,
+  description: `${site.name} — Computer Science student at FUTA focused on data science, analytics, and machine learning. Background, skills, experience, and education.`,
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: `About · ${site.name}`,
+    description: site.tagline,
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

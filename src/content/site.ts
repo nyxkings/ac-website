@@ -1,5 +1,14 @@
 import type { ProfessionalLink, SiteConfig } from "@/types";
 
+/** Production origin — set NEXT_PUBLIC_SITE_URL on Vercel (no trailing slash). */
+function resolveSiteUrl() {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+  if (process.env.VERCEL_URL)
+    return `https://${process.env.VERCEL_URL.replace(/\/$/, "")}`;
+  return "http://localhost:3000";
+}
+
 export const site: SiteConfig = {
   name: "Ada Chinda",
   shortName: "Ada Chinda",
@@ -15,6 +24,7 @@ export const site: SiteConfig = {
   resumeUrl: "/resume",
   resumePdfPath: "/resume/Ada-Chinda-Resume.pdf",
   university: "Federal University of Technology, Akure (FUTA)",
+  siteUrl: resolveSiteUrl(),
 };
 
 /**
@@ -61,3 +71,15 @@ export const navLinks = [
 /** Short summary used on the Resume page */
 export const resumeSummary =
   "Data science–oriented Computer Science student at FUTA with hands-on experience in Python data workflows, SQL/MySQL, Tableau dashboards, and machine learning research on time-series forecasting and portfolio optimisation. Seeking internships and junior roles in data science, analytics, and ML-adjacent work.";
+
+/** SEO keywords — factual identity terms only, not ranking claims */
+export const seoKeywords = [
+  "Ada Chinda",
+  "Ada Chinda data science",
+  "Ada Chinda FUTA",
+  "data science portfolio",
+  "machine learning student Nigeria",
+  "analytics portfolio",
+  "Prophet forecasting",
+  "Federal University of Technology Akure",
+] as const;

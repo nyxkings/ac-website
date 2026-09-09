@@ -5,7 +5,7 @@ import {
   type SkillGroup,
   type SkillLevel,
 } from "@/types";
-import { cn } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import {
   BarChart3,
   Boxes,
@@ -80,15 +80,17 @@ export function SkillsGrid({
   return (
     <div>
       {!compact ? (
-        <div className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-2 rounded-[var(--radius-card)] border border-line bg-surface px-4 py-3 text-xs text-muted sm:px-5">
+        <div className="mb-8 flex flex-col gap-3 rounded-[var(--radius-card)] border border-line bg-surface px-4 py-3 text-xs text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2 sm:px-5">
           <span className="font-mono tracking-wide uppercase">Legend</span>
-          {(Object.keys(SKILL_LEVEL_LABELS) as SkillLevel[]).map((level) => (
-            <span key={level} className="inline-flex items-center gap-2">
-              <LevelDots level={level} name={SKILL_LEVEL_LABELS[level]} />
-              {SKILL_LEVEL_LABELS[level]}
-            </span>
-          ))}
-          <span className="w-full text-[11px] sm:w-auto sm:ml-auto">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {(Object.keys(SKILL_LEVEL_LABELS) as SkillLevel[]).map((level) => (
+              <span key={level} className="inline-flex items-center gap-2">
+                <LevelDots level={level} name={SKILL_LEVEL_LABELS[level]} />
+                {SKILL_LEVEL_LABELS[level]}
+              </span>
+            ))}
+          </div>
+          <span className="text-[11px] leading-snug sm:ml-auto sm:max-w-xs sm:text-right">
             Indicators show relative comfort — not years of experience or %
             mastery.
           </span>

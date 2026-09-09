@@ -121,6 +121,11 @@ export interface SiteConfig {
   /** Public path to the downloadable PDF — replace file in public/resume/ */
   resumePdfPath: string;
   university: string;
+  /**
+   * Absolute site origin for SEO (canonical, OG, sitemap).
+   * Override with NEXT_PUBLIC_SITE_URL in production (e.g. https://adachinda.com).
+   */
+  siteUrl: string;
 }
 
 export interface ProfessionalLink {

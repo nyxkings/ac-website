@@ -13,7 +13,7 @@ export function SkillsPreview() {
   return (
     <section
       id="skills"
-      className="scroll-mt-24 border-b border-line py-16 sm:py-24"
+      className="scroll-mt-24 border-b border-line py-12 sm:py-24"
     >
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">

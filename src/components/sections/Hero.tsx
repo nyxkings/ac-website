@@ -18,35 +18,49 @@ export function Hero() {
         }}
       />
 
-      <ForecastMotif className="pointer-events-none absolute -right-8 bottom-0 h-[55%] w-[90%] max-w-3xl opacity-90 sm:right-0 sm:h-[70%] sm:w-[70%] lg:w-[60%]" />
+      {/* Decorative motif — quieter on small screens so type stays primary */}
+      <ForecastMotif className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-[38%] w-[115%] max-w-none opacity-40 sm:right-0 sm:left-auto sm:mx-0 sm:h-[65%] sm:w-[70%] sm:max-w-3xl sm:opacity-80 lg:w-[58%] lg:opacity-90" />
 
-      <Container className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center py-16 sm:py-20">
-        <p className="font-mono text-xs tracking-[0.16em] text-accent uppercase">
-          Computer Science · {site.university.split("(")[0].trim()}
+      <Container className="relative flex min-h-[min(100svh-4rem,44rem)] flex-col justify-center py-12 sm:min-h-[calc(100svh-4rem)] sm:py-20">
+        <p className="font-mono text-[11px] tracking-[0.14em] text-accent uppercase sm:text-xs sm:tracking-[0.16em]">
+          <span className="sm:hidden">Computer Science · FUTA</span>
+          <span className="hidden sm:inline">
+            Computer Science · {site.university.split("(")[0].trim()}
+          </span>
         </p>
 
         <h1
           id="hero-heading"
-          className="font-display mt-5 max-w-3xl text-5xl font-bold tracking-tight text-ink sm:text-6xl lg:text-7xl text-balance"
+          className="font-display mt-4 max-w-3xl text-[2.25rem] leading-[1.12] font-bold tracking-tight text-ink sm:mt-5 sm:text-6xl lg:text-7xl text-balance"
         >
           {site.name}
         </h1>
 
-        <p className="mt-5 font-mono text-sm tracking-wide text-muted sm:text-base">
+        <p className="mt-4 font-mono text-sm tracking-wide text-muted sm:mt-5 sm:text-base">
           {site.roleLine}
         </p>
 
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted text-pretty sm:mt-6 sm:text-xl">
           Building data-driven and intelligent technology solutions — from
           analysis and forecasting to clear, usable insights.
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <ButtonLink href="/projects">View projects</ButtonLink>
-          <ButtonLink href="/contact" variant="secondary">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+          <ButtonLink href="/projects" className="w-full sm:w-auto">
+            View projects
+          </ButtonLink>
+          <ButtonLink
+            href="/contact"
+            variant="secondary"
+            className="w-full sm:w-auto"
+          >
             Contact
           </ButtonLink>
-          <ButtonLink href={site.resumeUrl} variant="tertiary">
+          <ButtonLink
+            href={site.resumeUrl}
+            variant="tertiary"
+            className="justify-center sm:justify-start"
+          >
             Resume
             <ArrowDownRight className="h-4 w-4" aria-hidden />
           </ButtonLink>

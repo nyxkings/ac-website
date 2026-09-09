@@ -26,10 +26,26 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.description,
+    robots: project.placeholder
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
     openGraph: {
       title: project.title,
       description: project.description,
-      images: project.coverImage ? [{ url: project.coverImage }] : undefined,
+      type: "article",
+      url: `/projects/${project.slug}`,
+      images: project.coverImage
+        ? [{ url: project.coverImage, alt: `${project.title} cover visual` }]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: project.coverImage ? [project.coverImage] : undefined,
     },
   };
 }

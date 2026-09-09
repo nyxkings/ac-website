@@ -7,7 +7,7 @@ export function getAllProjects(): Project[] {
 
 export function getFeaturedProjects(limit = 3): Project[] {
   return getAllProjects()
-    .filter((p) => p.featured)
+    .filter((p) => p.featured && !p.placeholder)
     .slice(0, limit);
 }
 
@@ -34,8 +34,4 @@ export function getAdjacentProjects(slug: string): {
 
 export function getProjectSlugs(): string[] {
   return projects.map((p) => p.slug);
-}
-
-export function cn(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
 }

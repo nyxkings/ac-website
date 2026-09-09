@@ -1,4 +1,4 @@
-import { cn } from "@/lib/projects";
+import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
 export function ProjectPipeline({

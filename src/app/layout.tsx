@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Source_Sans_3, Syne } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { site } from "@/content/site";
+import { seoKeywords, site } from "@/content/site";
 import "./globals.css";
 
 const syne = Syne({
@@ -24,11 +24,46 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.siteUrl),
   title: {
     default: `${site.name} · ${site.roleLine}`,
     template: `%s · ${site.shortName}`,
   },
   description: site.tagline,
+  applicationName: site.shortName,
+  authors: [{ name: site.name, url: site.siteUrl }],
+  creator: site.name,
+  keywords: [...seoKeywords],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_NG",
+    url: site.siteUrl,
+    siteName: site.shortName,
+    title: `${site.name} · ${site.roleLine}`,
+    description: site.tagline,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} · ${site.roleLine}`,
+    description: site.tagline,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover" as const,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f4f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0f14" },
+  ],
 };
 
 const themeInitScript = `
@@ -43,6 +78,27 @@ const themeInitScript = `
 })();
 `;
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: site.siteUrl,
+  email: site.email,
+  telephone: site.phoneHref.replace("tel:", ""),
+  jobTitle: site.roleLine,
+  description: site.tagline,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Akure",
+    addressCountry: "NG",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: site.university,
+  },
+  sameAs: [site.githubUrl, site.linkedinUrl],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,6 +112,12 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd),
+          }}
+        />
       </head>
       <body className="flex min-h-full flex-col bg-bg text-ink">
         <a

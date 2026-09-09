@@ -13,7 +13,6 @@ Computer Science student building data-driven solutions through analytics, machi
 - Next.js (App Router) + TypeScript
 - Tailwind CSS
 - Typed content files (no CMS)
-- Framer Motion (sparingly)
 - Lucide icons
 - Deploy on Vercel
 
@@ -163,6 +162,33 @@ Note: Resume details imported from Canva (Ada Chinda) after login — name, cont
 
 ---
 
-## Later phases
+## Phase 6 — Responsive polish (done)
 
-6. Polish / launch (Vercel)
+Pass across Home, About, Projects, Project details, Resume, and Contact:
+
+- Mobile-first hero type/CTAs; quieter forecast motif on small screens
+- Sticky nav with larger tap targets, scrollable mobile menu, Resume link
+- Horizontal chip scroll for project filters
+- Full-width buttons on narrow viewports; min 44px touch targets
+- Overflow clipping, image aspect locks, meaningful cover alt text
+- Contact form / resume / footer spacing tuned for phone → desktop
+
+---
+
+## Production checklist
+
+Before deploying publicly:
+
+1. Set `NEXT_PUBLIC_SITE_URL` to your live origin (no trailing slash)
+2. Set `FORMSPREE_FORM_ID` so the contact form works
+3. Replace `public/resume/Ada-Chinda-Resume.pdf` with your real resume
+4. Replace placeholder projects in `src/content/projects.ts` (or leave them marked Placeholder)
+5. Add GitHub / live URLs for Prophet when available
+6. Optional: set portfolio URL in `professionalLinks` and clear `placeholder`
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm run build
+npm run start   # production preview
+```

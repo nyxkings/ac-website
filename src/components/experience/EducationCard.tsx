@@ -14,11 +14,11 @@ export function EducationCard({
   const achievements = item.achievements ?? [];
 
   return (
-    <article className="rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-7">
+    <article className="rounded-[var(--radius-card)] border border-line bg-surface p-4 sm:p-7">
       <p className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
         Education
       </p>
-      <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+      <h3 className="font-display mt-3 text-lg font-semibold tracking-tight text-ink text-balance sm:text-2xl">
         {item.program}
       </h3>
       <p className="mt-2 text-sm text-muted sm:text-base">

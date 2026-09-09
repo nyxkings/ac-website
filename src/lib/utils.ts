@@ -1,1 +1,4 @@
-export { cn, getFeaturedProjects, getProjectBySlug } from "@/lib/projects";
+/** Classname join helper — no external dependency */
+export function cn(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(" ");
+}

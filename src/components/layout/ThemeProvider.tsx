@@ -37,7 +37,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // Hydrate from localStorage / system preference after mount (script already set class)
     const initial = getPreferredTheme();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional client theme hydration
     setTheme(initial);
     applyTheme(initial);
     setReady(true);
@@ -75,9 +77,13 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={
-        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+        !ready
+          ? "Toggle color theme"
+          : theme === "dark"
+            ? "Switch to light mode"
+            : "Switch to dark mode"
       }
-      className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-accent hover:text-accent touch-manipulation"
     >
       {!ready ? (
         <span className="h-4 w-4" aria-hidden />

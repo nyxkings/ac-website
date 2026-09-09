@@ -14,9 +14,10 @@ function GitHubIcon({ className }: { className?: string }) {
 
 export function ProjectCard({ project }: { project: Project }) {
   const href = `/projects/${project.slug}`;
+  const coverAlt = `${project.title} cover visual`;
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors duration-200 hover:border-accent/60">
+    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors duration-200 hover:border-accent/60">
       <Link
         href={href}
         className="relative block aspect-[16/10] overflow-hidden border-b border-line bg-bg"
@@ -24,8 +25,11 @@ export function ProjectCard({ project }: { project: Project }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={project.coverImage}
-          alt=""
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+          alt={coverAlt}
+          width={960}
+          height={600}
+          className="h-full w-full object-cover transition-transform duration-300 motion-safe:hover:scale-[1.02]"
+          loading="lazy"
         />
         {project.placeholder ? (
           <span className="absolute top-3 left-3 rounded-[var(--radius-control)] border border-line bg-surface/90 px-2 py-1 font-mono text-[10px] tracking-wide text-signal uppercase backdrop-blur-sm">
@@ -34,40 +38,40 @@ export function ProjectCard({ project }: { project: Project }) {
         ) : null}
       </Link>
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
+      <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-6">
         <p className="font-mono text-[11px] tracking-[0.12em] text-accent uppercase">
           {PROJECT_CATEGORY_LABELS[project.category]}
           {project.year ? ` · ${project.year}` : null}
         </p>
 
-        <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-ink text-balance">
+        <h3 className="font-display mt-2 text-lg font-semibold tracking-tight text-ink text-balance sm:mt-3 sm:text-xl">
           <Link href={href} className="transition-colors hover:text-accent">
             {project.title}
           </Link>
         </h3>
 
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted text-pretty">
           {project.description}
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 5).map((tech) => (
+        <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+          {project.technologies.slice(0, 4).map((tech) => (
             <Tag key={tech}>{tech}</Tag>
           ))}
-          {project.technologies.length > 5 ? (
-            <Tag>+{project.technologies.length - 5}</Tag>
+          {project.technologies.length > 4 ? (
+            <Tag>+{project.technologies.length - 4}</Tag>
           ) : null}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          <ButtonLink href={href} className="h-10 px-4 text-sm">
+        <div className="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap">
+          <ButtonLink href={href} className="min-h-11 w-full px-4 text-sm sm:w-auto">
             View project
           </ButtonLink>
           {project.githubUrl ? (
             <ButtonLink
               href={project.githubUrl}
               variant="secondary"
-              className="h-10 px-4 text-sm"
+              className="min-h-11 w-full px-4 text-sm sm:w-auto"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on GitHub`}
@@ -80,7 +84,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <ButtonLink
               href={project.liveUrl}
               variant="secondary"
-              className="h-10 px-4 text-sm"
+              className="min-h-11 w-full px-4 text-sm sm:w-auto"
               target="_blank"
               rel="noopener noreferrer"
             >
