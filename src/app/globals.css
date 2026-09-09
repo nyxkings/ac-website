@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* Atlas Signal — design tokens */
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --ink: #0f1419;
+  --muted: #5c6570;
+  --line: #d8dce2;
+  --accent: #0f766e;
+  --accent-soft: #ccfbf1;
+  --accent-fg: #ffffff;
+  --signal: #b45309;
+  --hero-motif: color-mix(in srgb, var(--accent) 28%, transparent);
+  --hero-forecast: color-mix(in srgb, var(--accent) 14%, transparent);
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent);
+  --radius-control: 6px;
+  --radius-card: 10px;
+  --content-max: 70rem; /* 1120px */
+}
+
+.dark {
+  --bg: #0b0f14;
+  --surface: #12171f;
+  --ink: #e8eaed;
+  --muted: #9aa3ad;
+  --line: #2a323c;
+  --accent: #2dd4bf;
+  --accent-soft: #134e4a;
+  --accent-fg: #0b0f14;
+  --signal: #fbbf24;
+  --hero-motif: color-mix(in srgb, var(--accent) 35%, transparent);
+  --hero-forecast: color-mix(in srgb, var(--accent) 16%, transparent);
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #000 40%, transparent);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-signal: var(--signal);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Forecast motif draw-on */
+@keyframes motif-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes motif-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.motif-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: motif-draw 1.8s ease-out 0.3s forwards;
+}
+
+.motif-points circle {
+  opacity: 0;
+  animation: motif-fade 0.6s ease-out forwards;
+}
+
+.motif-points circle:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.motif-points circle:nth-child(2) {
+  animation-delay: 0.35s;
+}
+.motif-points circle:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.motif-points circle:nth-child(4) {
+  animation-delay: 0.65s;
+}
+.motif-points circle:nth-child(5) {
+  animation-delay: 0.8s;
+}
+.motif-points circle:nth-child(6) {
+  animation-delay: 0.95s;
+}
+
+.motif-forecast {
+  opacity: 0;
+  animation: motif-fade 1s ease-out 1.4s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motif-line {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .motif-points circle,
+  .motif-forecast {
+    opacity: 1;
+    animation: none;
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" fill="none">
+  <rect width="960" height="600" fill="#0F1419"/>
+  <rect width="960" height="600" fill="url(#g)" opacity="0.9"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="960" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#134E4A"/>
+      <stop offset="1" stop-color="#0B0F14"/>
+    </linearGradient>
+  </defs>
+  <path d="M80 420 C180 390 220 300 320 280 C420 260 460 340 560 300 C620 276 680 220 760 200 C820 186 880 190 900 180" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+  <path d="M560 300 C640 250 720 210 820 190 L900 180 L900 320 C820 340 720 360 640 380 C600 390 580 360 560 300 Z" fill="#2DD4BF" fill-opacity="0.12"/>
+  <circle cx="140" cy="400" r="6" fill="#2DD4BF"/>
+  <circle cx="260" cy="290" r="6" fill="#2DD4BF"/>
+  <circle cx="380" cy="300" r="6" fill="#2DD4BF"/>
+  <circle cx="500" cy="310" r="6" fill="#2DD4BF"/>
+  <circle cx="560" cy="300" r="7" fill="#FBBF24"/>
+  <text x="80" y="80" fill="#9AA3AD" font-family="ui-monospace, monospace" font-size="18" letter-spacing="3">FORECAST / PORTFOLIO</text>
+</svg>
