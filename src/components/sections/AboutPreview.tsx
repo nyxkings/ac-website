@@ -12,7 +12,7 @@ export function AboutPreview() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow={about.eyebrow}
-            title="A CS student focused on data, not demos."
+            title="A CS student focused on data."
             description="Turning messy information into decisions — with analysis, careful modelling, and visualization people can use."
           />
           <ButtonLink
