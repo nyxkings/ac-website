@@ -56,9 +56,10 @@ export const skillGroups: SkillGroup[] = [
     title: "Development",
     description: "Everyday tooling for writing and sharing work.",
     skills: [
+      { name: "GitHub", level: "core" },
       { name: "Git", level: "working" },
-      { name: "GitHub", level: "working" },
       { name: "VS Code", level: "core" },
+      { name: "Cursor", level: "working" },
       { name: "Jupyter Notebook", level: "working" },
     ],
   },
