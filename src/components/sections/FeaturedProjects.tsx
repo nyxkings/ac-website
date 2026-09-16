@@ -30,7 +30,13 @@ export function FeaturedProjects() {
           </ButtonLink>
         </div>
 
-        <ul className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+        <ul
+          className={
+            featured.length === 1
+              ? "mt-10 max-w-2xl sm:mt-12"
+              : "mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3"
+          }
+        >
           {featured.map((project) => (
             <li key={project.slug} className="min-w-0">
               <ProjectCard project={project} />
