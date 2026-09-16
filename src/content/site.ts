@@ -12,7 +12,7 @@ function resolveSiteUrl() {
 export const site: SiteConfig = {
   name: "Ada Chinda",
   shortName: "Ada Chinda",
-  roleLine: "Data Science · Analytics · Machine Learning",
+  roleLine: "Data Science · Machine Learning",
   tagline:
     "Computer Science student building data-driven solutions through analytics, machine learning, and financial modelling.",
   location: "Akure, Nigeria",
@@ -70,7 +70,7 @@ export const navLinks = [
 
 /** Short summary used on the Resume page */
 export const resumeSummary =
-  "Data science–oriented Computer Science student at FUTA with hands-on experience in Python data workflows, SQL/MySQL, Tableau dashboards, and machine learning research on time-series forecasting and portfolio optimisation. Seeking internships and junior roles in data science, analytics, and ML-adjacent work.";
+  "Data science/ML–oriented Computer Science student at FUTA with hands-on experience in Python data workflows, SQL/MySQL, Tableau dashboards, and machine learning research on time-series forecasting and portfolio optimisation. Seeking internships and junior roles in data science, analytics, and ML-adjacent work.";
 
 /** SEO keywords — factual identity terms only, not ranking claims */
 export const seoKeywords = [
